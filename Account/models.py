@@ -14,6 +14,9 @@ class CustomUserManager(UserManager):
         return self._create_user(username, email, password, **extra_fields)
     #define the super user creation here 
     def create_superuser(self, username, email=None, password=None, **extra_fields):
+        institution_name = "Utumishi Girls Academy"
+        institution = Institution.objects.get(institution_name=institution_name)
+        extra_fields.setdefault("institution",institution)
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
@@ -30,4 +33,4 @@ class User(AbstractUser):
     
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name",'last_name','username','institution']
+    REQUIRED_FIELDS = ["first_name",'last_name','username']

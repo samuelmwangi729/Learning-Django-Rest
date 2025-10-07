@@ -27,7 +27,7 @@ class Author(models.Model):
 
 class Books(models.Model):
     title = models.CharField(max_length=20,blank=False)
-    author = models.ManyToManyField(Author,related_name="books")
+    author = models.ForeignKey(Author,on_delete=models.DO_NOTHING,related_name="books",null=True,blank=True)
     genre = models.CharField(max_length=30)
     description = models.TextField()
     ISBN = models.IntegerField(unique=True)
